@@ -26,3 +26,6 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': e,
         }
+        
+        
+      POSTMAN POST LINK : https://mldx1amny4.execute-api.ap-south-1.amazonaws.com/Trail/resumes
