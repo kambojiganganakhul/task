@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word to PDF Converter</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+  <script>
+    function uploadDocument() {
+     
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const headers = new Headers();
+      // Set any required headers
+      headers.append('Content-Type', 'multipart/form-data');
+
+const apiUrl='https://mldx1amny4.execute-api.ap-south-1.amazonaws.com/Trail/resumes';
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: headers,
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          document.getElementById("message").innerHTML = "File uploaded successfully";
+                    
+        } else {
+          alert("File Uploaded");
+          document.getElementById("message").value = "Failed to upload file";
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("message").value = "An error occurred";
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="container mt-4">
+    <h1>Word to PDF Converter</h1>
+    <form id="uploadForm">
+      <div class="form-group">
+        <label for="fileInput">Select Word file (.docx)</label>
+        <input type="file" class="form-control-file" id="fileInput" accept=".docx" required />
+      </div>
+      <button type="submit" class="btn btn-primary" onclick="uploadDocument()">Convert to PDF</button>
+    </form>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
